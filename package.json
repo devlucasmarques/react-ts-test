@@ -3,9 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@types/react": "^16.8.2",
-    "@types/react-dom": "^16.8.0",
-    "@types/styled-components": "^5.1.4",
     "axios": "^0.20.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
@@ -19,6 +16,11 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "react-scripts-ts": "latest"
+    "react-scripts-ts": "latest",
+    "jest": "^26.5.3",
+    "@types/react": "^16.8.2",
+    "@types/react-dom": "^16.8.0",
+    "@types/styled-components": "^5.1.4",
+    "@types/jest": "^26.0.14"
   }
 }

@@ -16,7 +16,7 @@ interface AppState {
   char: IChar[];
 }
 
-class App extends Component<AppProps, AppState> {
+export default class App extends Component<AppProps, AppState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,16 +26,7 @@ class App extends Component<AppProps, AppState> {
   }
 
   componentDidMount() {
-    axios.get("https://swapi.dev/api/people/").then(res => {
-      const chars = res.data.results;
-      let charDTO: IChar[] = [];
-      chars.forEach(char => {
-        const { name, eye_color } = char;
-        charDTO.push({ name, eye_color });
-      });
-      charDTO.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
-      this.setState({ char: charDTO });
-    });
+    this.getCharacters();
   }
 
   render() {
@@ -46,6 +37,29 @@ class App extends Component<AppProps, AppState> {
         ))}
       </Content>
     );
+  }
+
+  async getCharacters(): Promise<number> {
+    let len = -1;
+    await axios
+      .get("https://swapi.dev/api/people/")
+      .then(res => {
+        const chars = res.data.results;
+        let charDTO: IChar[] = [];
+        chars.forEach(char => {
+          const { name, eye_color } = char;
+          charDTO.push({ name, eye_color });
+        });
+        charDTO.sort((a, b) =>
+          a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+        );
+        this.setState({ char: charDTO });
+        len = charDTO.length;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    return len;
   }
 }
 
