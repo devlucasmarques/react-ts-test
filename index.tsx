@@ -35,7 +35,6 @@ class App extends Component<AppProps, AppState> {
       });
       charDTO.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
       this.setState({ char: charDTO });
-      console.log(this.state);
     });
   }
 
